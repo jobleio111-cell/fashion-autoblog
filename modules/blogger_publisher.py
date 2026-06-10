@@ -45,7 +45,7 @@ class BloggerPublisher:
                 flow = InstalledAppFlow.from_client_secrets_file(
                     self.client_secrets_file, SCOPES
                 )
-                creds = flow.run_local_server(port=0)
+                creds = flow.run_local_server(port=0, open_browser=False)
 
             # Token save karo
             os.makedirs("auth", exist_ok=True)
@@ -115,6 +115,9 @@ class BloggerPublisher:
     <p>Save this post and share it with someone who loves fashion! 
     Follow us for more <strong>outfit ideas, style tips, and latest trends</strong>.</p>
 </div>
+<!-- HIDDEN MARKERS FOR MAKE.COM PINTEREST AUTOMATION -->
+<span style="display:none;" id="pin-image-url">{image_data.get('url', '')}</span>
+<span style="display:none;" id="pin-description">{pin_description}</span>
 """
 
             # Blogger API post object
