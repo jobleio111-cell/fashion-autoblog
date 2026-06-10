@@ -26,12 +26,16 @@ def load_config() -> dict:
     with open(config_path, "r", encoding="utf-8") as f:
         config = json.load(f)
 
-    # Validate required keys
-    required = ["gemini_api_key", "pinterest_access_token",
-                "pinterest_board_id", "blogger_blog_id"]
-    missing = [k for k in required if not config.get(k) or "YOUR_" in str(config.get(k, ""))]
+    # Validate required keys (Gemini OR Groq)
+    has_ai_key = bool(config.get("gemini_api_key")) or bool(config.get("groq_api_key"))
+    missing = []
+    if not has_ai_key:
+        missing.append("gemini_api_key ya groq_api_key")
+    if not config.get("blogger_blog_id") or "YOUR_" in str(config.get("blogger_blog_id", "")):
+        missing.append("blogger_blog_id")
+        
     if missing:
-        raise ValueError(f"❌ Config mein yeh keys missing hain: {missing}\nconfig.json update karo!")
+        raise ValueError(f"❌ Config mein yeh keys missing hain: {missing}\nGitHub Secrets check karo!")
     return config
 
 
