@@ -17,6 +17,10 @@ class TrendFinder:
         self.config = config
         self.context = context
         self.niche = config.get("niche", "Female Fashion & Latest Trends")
+        
+        self.used_topics = []
+        if self.context and "published_posts" in self.context:
+            self.used_topics = [post.get("topic", "") for post in self.context["published_posts"].values()]
 
         # Fashion niche ke liye seed keywords
         self.seed_keywords = [
