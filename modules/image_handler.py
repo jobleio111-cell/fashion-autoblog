@@ -244,7 +244,8 @@ class ImageHandler:
     def _add_text_overlay(self, img: Image.Image, title: str) -> Image.Image:
         """Add a stylish text overlay to the image"""
         try:
-            draw = ImageDraw.Draw(img, "RGBA")
+            img = img.convert("RGBA")
+            draw = ImageDraw.Draw(img)
             width, height = img.size
             
             # Draw semi-transparent dark rectangle at the bottom
@@ -253,9 +254,16 @@ class ImageHandler:
             draw.rectangle([(0, box_top), (width, height)], fill=(0, 0, 0, 180))
             
             # Load font
-            try:
-                font = ImageFont.truetype("arialbd.ttf", 60)
-            except IOError:
+            font = None
+            fonts_to_try = ["arialbd.ttf", "DejaVuSans-Bold.ttf", "FreeSansBold.ttf", "LiberationSans-Bold.ttf"]
+            for f in fonts_to_try:
+                try:
+                    font = ImageFont.truetype(f, 60)
+                    break
+                except IOError:
+                    continue
+            
+            if font is None:
                 font = ImageFont.load_default()
                 
             # Basic text wrapping
@@ -309,6 +317,10 @@ class ImageHandler:
                 
             # TEXT OVERLAY
             img = self._add_text_overlay(img, title)
+            
+            # Convert back to RGB for JPEG saving
+            if img.mode == 'RGBA':
+                img = img.convert('RGB')
 
             os.makedirs("temp_images", exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
