@@ -71,8 +71,8 @@ jobs:
       # 5. Google Auth setup (Safe write to avoid JSON corruption)
       - name: 🔐 Google Auth Setup
         env:
-          CLIENT_SECRETS: ${{ secrets.BLOGGER_CLIENT_SECRETS }}
-          TOKEN: ${{ secrets.BLOGGER_TOKEN }}
+          CLIENT_SECRETS: ${{ secrets.BLOGGER_CLIENT_SECRETS_JSON }}
+          TOKEN: ${{ secrets.BLOGGER_TOKEN_JSON }}
         run: |
           mkdir -p auth
           echo "$CLIENT_SECRETS" > auth/client_secrets.json
