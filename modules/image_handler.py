@@ -232,8 +232,7 @@ class ImageHandler:
                     optimized = self._download_and_optimize(img_url, title)
                     optimized.update({
                         "source": "pexels",
-                        "photographer": photo.get("photographer", "Pexels"),
-                        "url": img_url
+                        "photographer": photo.get("photographer", "Pexels")
                     })
                     return optimized
         except Exception as e:
@@ -244,61 +243,82 @@ class ImageHandler:
     def _add_text_overlay(self, img: Image.Image, title: str) -> Image.Image:
         """Add a stylish text overlay to the image"""
         try:
-            img = img.convert("RGBA")
-            draw = ImageDraw.Draw(img)
-            width, height = img.size
+            # Create a Pinterest style layout: Text on top, image on bottom
+            bg_color = (235, 230, 225) # Light warm gray background
+            canvas = Image.new("RGB", (1000, 1500), color=bg_color)
             
-            # Draw semi-transparent dark rectangle at the bottom
-            box_height = 400
-            box_top = height - box_height
-            draw.rectangle([(0, box_top), (width, height)], fill=(0, 0, 0, 180))
-            
-            # Load font
-            font = None
-            fonts_to_try = ["arialbd.ttf", "DejaVuSans-Bold.ttf", "FreeSansBold.ttf", "LiberationSans-Bold.ttf"]
-            for f in fonts_to_try:
+            # Download font robustly (Anton is great for Pinterest)
+            font_path = "Anton-Regular.ttf"
+            if not os.path.exists(font_path):
                 try:
-                    font = ImageFont.truetype(f, 60)
-                    break
-                except IOError:
-                    continue
+                    import urllib.request
+                    font_url = "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf"
+                    urllib.request.urlretrieve(font_url, font_path)
+                except Exception as e:
+                    print(f"   ⚠️ Font download failed: {e}")
             
-            if font is None:
+            # Resize original image to fit bottom area (1000x900)
+            img_aspect = img.width / img.height
+            target_aspect = 1000 / 900
+            
+            if img_aspect > target_aspect:
+                # Image is wider, crop width
+                new_width = int(img.height * target_aspect)
+                offset = (img.width - new_width) // 2
+                img = img.crop((offset, 0, offset + new_width, img.height))
+            else:
+                # Image is taller, crop height
+                new_height = int(img.width / target_aspect)
+                offset = (img.height - new_height) // 2
+                img = img.crop((0, offset, img.width, offset + new_height))
+                
+            img = img.resize((1000, 900), Image.LANCZOS)
+            
+            # Paste image at the bottom
+            canvas.paste(img, (0, 600))
+            
+            # Add text at the top (0 to 600)
+            draw = ImageDraw.Draw(canvas)
+            
+            try:
+                font = ImageFont.truetype(font_path, 110)
+            except IOError:
                 font = ImageFont.load_default()
                 
-            # Basic text wrapping
-            words = title.split()
-            lines = []
-            current_line = []
+            # Wrap text
+            import textwrap
+            lines = textwrap.wrap(title.upper(), width=16)
             
-            for word in words:
-                current_line.append(word)
-                test_line = ' '.join(current_line)
+            # Calculate total text height
+            try:
+                line_heights = [font.getbbox(line)[3] - font.getbbox(line)[1] for line in lines]
+                total_text_height = sum(line_heights) + (len(lines) - 1) * 20 # 20px spacing
+            except AttributeError:
+                total_text_height = len(lines) * 120
+                
+            # Start Y so it is centered in the top 600px
+            y_text = (600 - total_text_height) // 2
+            
+            # Colorful Pinterest aesthetic
+            colors = [(20, 100, 150), (200, 50, 100), (40, 40, 40)] # Blue, Pink, Dark Gray
+            
+            for i, line in enumerate(lines):
                 try:
-                    w = font.getlength(test_line)
+                    bbox = font.getbbox(line)
+                    line_w = bbox[2] - bbox[0]
                 except AttributeError:
-                    w = len(test_line) * 35 
+                    line_w = len(line) * 50
                     
-                if w > (width - 100):
-                    current_line.pop()
-                    lines.append(' '.join(current_line))
-                    current_line = [word]
-                    
-            if current_line:
-                lines.append(' '.join(current_line))
+                x_text = (1000 - line_w) // 2
+                color = colors[i % len(colors)]
+                draw.text((x_text, y_text), line, font=font, fill=color)
                 
-            y_text = box_top + 80
-            for line in lines:
                 try:
-                    line_w = font.getlength(line)
-                    x_text = (width - line_w) / 2
-                except AttributeError:
-                    x_text = 100
-                
-                draw.text((x_text, y_text), line, font=font, fill=(255, 255, 255))
-                y_text += 70
-                
-            return img
+                    y_text += (bbox[3] - bbox[1]) + 20
+                except:
+                    y_text += 130
+                    
+            return canvas
         except Exception as e:
             print(f"   ❌ Text overlay error: {e}")
             return img
@@ -324,21 +344,25 @@ class ImageHandler:
 
             os.makedirs("temp_images", exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            local_path = f"temp_images/post_{timestamp}.jpg"
+            filename = f"post_{timestamp}.jpg"
+            local_path = f"temp_images/{filename}"
             img.save(local_path, "JPEG", quality=85)
 
             with open(local_path, "rb") as f:
                 img_base64 = base64.b64encode(f.read()).decode('utf-8')
+                
+            github_url = f"https://raw.githubusercontent.com/jobleio111-cell/fashion-autoblog/main/temp_images/{filename}"
 
             return {
                 "local_path": local_path,
                 "base64": img_base64,
+                "url": github_url,
                 "width": 1000,
                 "height": 1500
             }
         except Exception as e:
             print(f"   ❌ Download/optimize error: {e}")
-            return {"local_path": None, "base64": None}
+            return {"local_path": None, "base64": None, "url": None}
 
     def _create_placeholder_image(self, title: str) -> dict:
         """Agar sab fail ho jain toh simple placeholder image"""
@@ -372,23 +396,23 @@ class ImageHandler:
             return {"local_path": None, "base64": None}
 
     def _get_finance_query(self, topic: str) -> str:
-        """Pexels ke liye search query (Updated for Fashion)"""
+        """Pexels ke liye search query (Updated for Dogs)"""
         topic_lower = topic.lower()
         mapping = {
-            "dress": "fashion dress women",
-            "summer": "summer fashion women style",
-            "winter": "winter fashion outfits",
-            "casual": "casual street fashion women",
-            "formal": "formal wear women fashion",
-            "shoes": "fashion shoes heels",
-            "makeup": "beauty makeup fashion",
-            "hair": "hairstyle beauty fashion",
-            "trend": "latest fashion trends women",
+            "puppy": "cute puppy dog",
+            "food": "dog eating food",
+            "health": "healthy active dog",
+            "vet": "veterinarian dog care",
+            "grooming": "dog bathing grooming",
+            "train": "dog training",
+            "breed": "beautiful dog breeds",
+            "toy": "dog playing with toy",
+            "walk": "walking dog outdoor",
         }
         for key, query in mapping.items():
             if key in topic_lower:
                 return query
-        return "women fashion model style"
+        return "happy cute dog pet"
 
     def get_image_as_bytes(self, local_path: str) -> bytes:
         """Image bytes return karo"""
