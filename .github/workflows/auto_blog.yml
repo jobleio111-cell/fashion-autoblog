@@ -2,11 +2,16 @@ name: 🤖 Auto Blog Publisher
 
 on:
   schedule:
-    # UTC time mein hai - Pakistan (PKT) = UTC+5
-    # 4:17 UTC = 9:17 AM PKT (subah ki post) - Delay se bachne ke liye 17 minute set kiya hai
-    - cron: '17 4 * * *'
-    # 10:17 UTC = 3:17 PM PKT (dopahar ki post)
-    - cron: '17 10 * * *'
+    # 03:17 UTC = 08:17 AM PKT
+    - cron: '17 3 * * *'
+    # 07:17 UTC = 12:17 PM PKT
+    - cron: '17 7 * * *'
+    # 11:17 UTC = 04:17 PM PKT
+    - cron: '17 11 * * *'
+    # 15:17 UTC = 08:17 PM PKT
+    - cron: '17 15 * * *'
+    # 19:17 UTC = 12:17 AM PKT
+    - cron: '17 19 * * *'
   
   # Manual trigger bhi kar sako
   workflow_dispatch:
@@ -60,7 +65,7 @@ jobs:
             "pinterest_board_id": "disabled",
             "blogger_blog_id": "$BLOG_ID",
             "blogger_client_secrets_file": "auth/client_secrets.json",
-            "niche": "Female Fashion & Latest Trends",
+            "niche": "Women's Fashion and Style",
             "posts_per_day": 2,
             "language": "English",
             "min_word_count": 1000,
@@ -116,7 +121,7 @@ jobs:
         run: |
           git config --local user.email "autoblog@github.com"
           git config --local user.name "Auto Blog Bot"
-          git add project_context.json published_posts/ logs/ || true
+          git add project_context.json published_posts/ logs/ temp_images/ || true
           git diff --staged --quiet || git commit -m "📝 Auto post: $(date '+%Y-%m-%d %H:%M')"
           git push || true
         env:
