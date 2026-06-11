@@ -396,23 +396,23 @@ class ImageHandler:
             return {"local_path": None, "base64": None}
 
     def _get_finance_query(self, topic: str) -> str:
-        """Pexels ke liye search query (Updated for Dogs)"""
+        """Pexels ke liye search query (Updated for Fashion)"""
         topic_lower = topic.lower()
         mapping = {
-            "puppy": "cute puppy dog",
-            "food": "dog eating food",
-            "health": "healthy active dog",
-            "vet": "veterinarian dog care",
-            "grooming": "dog bathing grooming",
-            "train": "dog training",
-            "breed": "beautiful dog breeds",
-            "toy": "dog playing with toy",
-            "walk": "walking dog outdoor",
+            "dress": "beautiful dress fashion",
+            "shoes": "fashionable shoes heels",
+            "makeup": "makeup beauty portrait",
+            "outfit": "stylish outfit street style",
+            "style": "women fashion style",
+            "summer": "summer fashion outfit",
+            "winter": "winter fashion coat",
+            "accessory": "fashion accessories jewelry",
+            "hair": "beautiful hairstyle woman",
         }
         for key, query in mapping.items():
             if key in topic_lower:
                 return query
-        return "happy cute dog pet"
+        return "women fashion portrait"
 
     def get_image_as_bytes(self, local_path: str) -> bytes:
         """Image bytes return karo"""
