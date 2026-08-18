@@ -694,3 +694,6 @@
 [2026-08-18 11:40:46] [INFO] Topic selected: Street Style Fashion: How to Get the Look
 [2026-08-18 11:40:46] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-18 15:46:53] [INFO] Topic selected: how to style a classic white shirt in 5 different ways
+[2026-08-18 15:46:53] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
