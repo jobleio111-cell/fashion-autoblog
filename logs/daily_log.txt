@@ -703,3 +703,6 @@
 [2026-08-19 03:59:12] [INFO] Topic selected: effortless casual outfit ideas for the weekend
 [2026-08-19 03:59:12] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-19 11:40:12] [INFO] Topic selected: 5 vintage fashion trends making a huge comeback
+[2026-08-19 11:40:12] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
