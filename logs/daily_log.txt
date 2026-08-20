@@ -709,3 +709,6 @@
 [2026-08-20 03:59:31] [INFO] Topic selected: top 5 denim trends you need to try this season
 [2026-08-20 03:59:31] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-20 07:59:14] [INFO] Topic selected: black formal dresses for women
+[2026-08-20 07:59:14] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
