@@ -727,3 +727,6 @@
 [2026-08-21 08:00:06] [INFO] Topic selected: 10 must-have wardrobe essentials for every woman
 [2026-08-21 08:00:06] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-21 11:42:04] [INFO] Topic selected: How to Style a Classic White Shirt in 5 Different Ways
+[2026-08-21 11:42:04] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
