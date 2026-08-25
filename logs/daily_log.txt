@@ -781,3 +781,6 @@
 [2026-08-24 19:46:51] [INFO] Topic selected: The Best Color Combinations for Winter Outfits
 [2026-08-24 19:46:51] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-25 04:00:13] [INFO] Topic selected: minimalist fashion: how to look expensive with less
+[2026-08-25 04:00:13] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
