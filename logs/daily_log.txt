@@ -829,3 +829,6 @@
 [2026-08-28 15:24:06] [INFO] Topic selected: Chic Office Wear Ideas for Professional Women
 [2026-08-28 15:24:06] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-08-28 19:28:19] [INFO] Topic selected: top 5 denim trends you need to try this season
+[2026-08-28 19:28:19] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
