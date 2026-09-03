@@ -928,3 +928,6 @@
 [2026-09-03 18:40:13] [INFO] Topic selected: street style fashion: how to get the look
 [2026-09-03 18:40:14] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-09-03 21:44:32] [INFO] Topic selected: Top Makeup Trends to Complement Your Outfits
+[2026-09-03 21:44:33] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
