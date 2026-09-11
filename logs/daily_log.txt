@@ -1042,3 +1042,6 @@
 [2026-09-11 12:14:02] [INFO] Topic selected: 5 Vintage Fashion Trends Making a Huge Comeback
 [2026-09-11 12:14:02] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-09-11 15:01:31] [INFO] Topic selected: cute and comfortable airport outfit ideas
+[2026-09-11 15:01:31] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
