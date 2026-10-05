@@ -1399,3 +1399,6 @@
 [2026-10-05 10:28:25] [INFO] Topic selected: Minimalist Fashion: How to Look Expensive with Less
 [2026-10-05 10:28:26] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-10-05 16:07:03] [INFO] Topic selected: how to style a classic white shirt in 5 different ways
+[2026-10-05 16:07:03] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
