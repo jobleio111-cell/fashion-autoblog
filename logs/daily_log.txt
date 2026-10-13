@@ -1525,3 +1525,6 @@
 [2026-10-13 20:41:32] [INFO] Topic selected: street style fashion: how to get the look
 [2026-10-13 20:41:32] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-10-13 23:18:03] [INFO] Topic selected: Chic Office Wear Ideas for Professional Women
+[2026-10-13 23:18:03] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
