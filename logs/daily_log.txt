@@ -1774,3 +1774,6 @@
 [2026-10-30 14:16:08] [INFO] Topic selected: black formal dresses
 [2026-10-30 14:16:08] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-10-30 17:00:37] [INFO] Topic selected: 10 must-have wardrobe essentials for every woman
+[2026-10-30 17:00:38] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
