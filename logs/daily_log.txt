@@ -2086,3 +2086,6 @@
 [2026-11-20 11:41:51] [INFO] Topic selected: the best shoes to pair with wide leg pants
 [2026-11-20 11:41:51] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
 
+[2026-11-20 16:12:21] [INFO] Topic selected: black formal dresses
+[2026-11-20 16:12:21] [CRITICAL] Critical error in run_single_post: Groq API Error 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
